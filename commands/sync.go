@@ -12,8 +12,6 @@ func Upgrade(packages []string) error {
 	return run("apt-get", "upgrade", nil)
 }
 
-// func Upgrade
-
-func Test(packages []string) error {
-	return run("echo", "", packages)
+func Search(packages []string) error {
+	return run("apt-cache", "search", packages)
 }
