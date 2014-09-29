@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
-	"jogurto/commands"
+	"github.com/lapingvino/jogurto/commands"
 )
 
 func main() {
