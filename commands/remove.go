@@ -6,4 +6,4 @@ func Remove(packages []string) error {
 
 func Purge(packages []string) error {
 	return run("apt-get", "purge", packages)
-} 
+}

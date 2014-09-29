@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"github.com/lapingvino/jogurto/commands"
+	"os"
 )
 
 func main() {

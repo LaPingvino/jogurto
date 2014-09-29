@@ -3,15 +3,17 @@ package commands
 import "os/exec"
 import "os"
 
-type Command func (packages []string) error
+type Command func(packages []string) error
 
 // doAll permits to perform commands one after another
 func doAll(fn ...Command) Command {
-	return func (packages []string) error {
+	return func(packages []string) error {
 		var err error
 		for i := range fn {
 			err = fn[i](packages)
-			if err != nil { return err }
+			if err != nil {
+				return err
+			}
 		}
 		return nil
 	}
@@ -38,12 +40,12 @@ func run(command string, arg string, args []string) error {
 // The options that you can use with jogurto
 // You can put functions here, or string functions together
 // with a higher order function like doAll.
-var Map = map[string]Command {
-	"-S": Install,
-	"-Sy": doAll(Update, Install),
-	"-Syu": doAll(Update, Upgrade, Install),
+var Map = map[string]Command{
+	"-S":    Install,
+	"-Sy":   doAll(Update, Install),
+	"-Syu":  doAll(Update, Upgrade, Install),
 	"-Syyu": doAll(Update, DistUpgrade, Install),
-	"-Ss": Search,
-	"-R": Remove,
-	"-Rn": Purge,
-} 
+	"-Ss":   Search,
+	"-R":    Remove,
+	"-Rn":   Purge,
+}
