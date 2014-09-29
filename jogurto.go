@@ -19,9 +19,9 @@ func main() {
 	if run != nil {
 		err := run(packages)
 		if err != nil {
-			fmt.Printf("An error occurred: %s", err.Error())
+			fmt.Println("An error occurred:", err.Error())
 		}
 	} else {
-		fmt.Println("Command not defined")
+		fmt.Println("Option", options, "not implemented")
 	}
 }
