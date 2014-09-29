@@ -34,5 +34,6 @@ var Map = map[string]Command {
 	"-S": Install,
 	"-Sy": doAll(Update, Install),
 	"-Syu": doAll(Update, Upgrade, Install),
+	"-Syyu": doAll(Update, DistUpgrade, Install),
 	"-Ss": Search,
 } 

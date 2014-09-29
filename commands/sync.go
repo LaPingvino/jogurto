@@ -12,6 +12,10 @@ func Upgrade(packages []string) error {
 	return run("apt-get", "upgrade", nil)
 }
 
+func DistUpgrade(packages []string) error {
+	return run("apt-get", "dist-upgrade", nil)
+}
+
 func Search(packages []string) error {
 	return run("apt-cache", "search", packages)
 }
