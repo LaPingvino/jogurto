@@ -41,13 +41,15 @@ func run(command string, arg string, args []string) error {
 // You can put functions here, or string functions together
 // with a higher order function like doAll.
 var Map = map[string]Command{
-	"-S":    Install,
-	"-Sy":   doAll(Update, Install),
-	"-Syu":  doAll(Update, Upgrade, Install),
-	"-Syyu": doAll(Update, DistUpgrade, Install),
-	"-Ss":   Search,
-	"-R":    Remove,
-	"-Rn":   Purge,
-	"-Rs":   doAll(Remove, Autoremove),
-	"-Q":    LocalSearch,
+	"--help": Help,
+	"-h":     Help,
+	"-S":     Install,
+	"-Sy":    doAll(Update, Install),
+	"-Syu":   doAll(Update, Upgrade, Install),
+	"-Syyu":  doAll(Update, DistUpgrade, Install),
+	"-Ss":    Search,
+	"-R":     Remove,
+	"-Rn":    Purge,
+	"-Rs":    doAll(Remove, Autoremove),
+	"-Q":     LocalSearch,
 }
