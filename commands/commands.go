@@ -48,4 +48,5 @@ var Map = map[string]Command{
 	"-Ss":   Search,
 	"-R":    Remove,
 	"-Rn":   Purge,
+	"-Rs":   doAll(Remove, Autoremove),
 }
