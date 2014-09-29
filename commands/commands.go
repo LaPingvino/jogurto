@@ -5,6 +5,7 @@ import "os"
 
 type Command func (packages []string) error
 
+// doAll permits to perform commands one after another
 func doAll(fn ...Command) Command {
 	return func (packages []string) error {
 		var err error
@@ -16,6 +17,10 @@ func doAll(fn ...Command) Command {
 	}
 }
 
+// run does everything to run a command as if you typed it
+// yourself. The arg part can be omitted giving it an empty
+// string. It's there mostly to make the apt commands work
+// as they have the actual command as the first arg.
 func run(command string, arg string, args []string) error {
 	var cmdargs []string
 	if arg == "" {
@@ -30,6 +35,9 @@ func run(command string, arg string, args []string) error {
 	return cmd.Run()
 }
 
+// The options that you can use with jogurto
+// You can put functions here, or string functions together
+// with a higher order function like doAll.
 var Map = map[string]Command {
 	"-S": Install,
 	"-Sy": doAll(Update, Install),
