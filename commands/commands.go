@@ -1,7 +1,9 @@
 package commands
 
-import "os/exec"
-import "os"
+import (
+	"os"
+	"os/exec"
+)
 
 type Command func(packages []string) error
 
@@ -34,7 +36,15 @@ func run(command string, arg string, args []string) error {
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	return cmd.Run()
+	err := cmd.Run()
+	if err != nil && command == "apt-get" {
+		// apt-get invocation needs root permissions.
+		// Rerunning with sudo
+		// TODO: find out if it is possible to elevate permissions
+		// of the running go binary
+		err = run("sudo", command, append([]string{arg}, args...))
+	}
+	return err
 }
 
 // The options that you can use with jogurto
