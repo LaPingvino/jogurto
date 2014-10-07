@@ -20,10 +20,12 @@ func main() {
 		err := run(packages)
 		if err != nil {
 			fmt.Println("An error occurred:", err.Error())
+			os.Exit(1)
 		}
 	} else {
 		if options != "" {
 			fmt.Println("Option", options, "not implemented\n")
+			os.Exit(2)
 		}
 		commands.Help(nil)
 	}
