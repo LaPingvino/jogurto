@@ -3,6 +3,7 @@ package commands
 import (
 	"os"
 	"os/exec"
+	"syscall"
 )
 
 type Command func(packages []string) error
@@ -32,18 +33,14 @@ func run(command string, arg string, args []string) error {
 	} else {
 		cmdargs = append([]string{arg}, args...)
 	}
+	if syscall.Setuid(0) != nil && command != "sudo" {
+		return run("sudo", command, cmdargs)
+	}
 	cmd := exec.Command(command, cmdargs...)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err := cmd.Run()
-	if err != nil && command == "apt-get" {
-		// apt-get invocation needs root permissions.
-		// Rerunning with sudo
-		// TODO: find out if it is possible to elevate permissions
-		// of the running go binary
-		err = run("sudo", command, append([]string{arg}, args...))
-	}
 	return err
 }
 
