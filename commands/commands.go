@@ -59,4 +59,5 @@ var Map = map[string]Command{
 	"-Rn":    Purge,
 	"-Rs":    doAll(Remove, Autoremove),
 	"-Q":     LocalSearch,
+	"-U":     doAll(InstallLocal, InstallMissing),
 }
