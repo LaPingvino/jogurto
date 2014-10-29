@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/lapingvino/jogurto/commands"
 	"os"
+
+	"github.com/lapingvino/jogurto/commands"
 )
 
 func main() {
@@ -24,7 +25,7 @@ func main() {
 		}
 	} else {
 		if options != "" {
-			fmt.Println("Option", options, "not implemented\n")
+			fmt.Print("Option", options, "not implemented\n\n")
 			os.Exit(2)
 		}
 		commands.Help(nil)

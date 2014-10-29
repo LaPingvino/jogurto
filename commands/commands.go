@@ -26,15 +26,15 @@ func doAll(fn ...Command) Command {
 // yourself. The arg part can be omitted giving it an empty
 // string. It's there mostly to make the apt commands work
 // as they have the actual command as the first arg.
-func run(command string, arg string, args []string) error {
+func run(command string, arg string, args []string, asRoot bool) error {
 	var cmdargs []string
 	if arg == "" {
 		cmdargs = args
 	} else {
 		cmdargs = append([]string{arg}, args...)
 	}
-	if syscall.Setuid(0) != nil && command != "sudo" {
-		return run("sudo", command, cmdargs)
+	if syscall.Setuid(0) != nil && asRoot {
+		return run("sudo", command, cmdargs, false)
 	}
 	cmd := exec.Command(command, cmdargs...)
 	cmd.Stdin = os.Stdin
